@@ -1,0 +1,162 @@
+/* تحسين الاستيرادات وإضافة متغيرات CSS محسنة */
+@import "../styles/base.css";
+@import "../styles/animations.css";
+@import "../styles/utilities.css";
+
+/* متغيرات CSS محسنة للمشروع */
+:root {
+  --font-arabic: "Cairo", "Noto Sans Arabic", sans-serif;
+  --font-english: "Inter", "Roboto", sans-serif;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-elegant: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --border-radius-modern: 0.75rem;
+
+  /* إضافة متغيرات جديدة للأداء والأمان */
+  --content-max-width: 1200px;
+  --header-height: 4rem;
+  --footer-height: auto;
+  --z-index-header: 50;
+  --z-index-modal: 100;
+  --z-index-tooltip: 200;
+}
+
+/* تحسينات للنصوص ثنائية اللغة */
+[dir="rtl"] {
+  font-family: var(--font-arabic);
+}
+
+[dir="ltr"] {
+  font-family: var(--font-english);
+}
+
+/* تحسينات الأداء والأمان */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  /* حماية من تحميل المحتوى الضار */
+  content-security-policy: "default-src 'self'";
+}
+
+/* تحسينات الأمان للنماذج */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* منع تسريب المعلومات */
+.sensitive-data {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* تحسينات الوصولية */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* تحسينات إضافية للوصولية */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* تحسينات للطباعة */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  /* تحسينات إضافية للطباعة */
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+}
+
+/* تحسينات للشاشات عالية الدقة */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  img {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* تحسينات للأجهزة المحمولة */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px; /* منع التكبير التلقائي في iOS */
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px; /* منع التكبير التلقائي في iOS */
+  }
+}
+
+/* تحسينات للتركيز والتنقل بلوحة المفاتيح */
+:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: #000;
+  color: #fff;
+  padding: 8px;
+  text-decoration: none;
+  z-index: 1000;
+}
+
+.skip-link:focus {
+  top: 6px;
+}

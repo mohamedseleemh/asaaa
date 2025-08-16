@@ -1,0 +1,141 @@
+// app/page.tsx
+import React from "react";
+import { ScrollProgress } from "@/components/animate/scroll-progress";
+import { AnimatedGrid } from "@/components/visual/animated-grid";
+
+const Page = () => {
+  return (
+    <div className="min-h-screen">
+      <ScrollProgress />
+      <AnimatedGrid />
+      {/* rest of code here */}
+    </div>
+  );
+};
+
+export default Page;
+
+// components/blocks/hero-block.tsx
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { MessageCircle, ArrowLeft, ArrowRight } from 'lucide-react';
+import { Magnetic } from "@/components/animate/magnetic";
+
+const HeroBlock = ({ data, isRTL, locale }) => {
+  const buildWhatsApp = (subject, body, locale, siteName) => {
+    // implementation here
+  };
+
+  return (
+    <div>
+      <Magnetic>
+        <Button
+          className={`group min-w-[260px] bg-gradient-to-r ${palette.range} text-white`}
+          size="lg"
+          onClick={() =>
+            window.open(
+              buildWhatsApp(isRTL ? "استفسار عام" : "General Inquiry", "N/A", locale, data.site.name),
+              "_blank"
+            )
+          }
+        >
+          <MessageCircle className="h-5 w-5 me-2" />
+          {data.hero.cta}
+          {isRTL ? (
+            <ArrowLeft className="ms-2 h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+          ) : (
+            <ArrowRight className="ms-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          )}
+        </Button>
+      </Magnetic>
+      {/* rest of code here */}
+    </div>
+  );
+};
+
+export default HeroBlock;
+
+// components/blocks/features-block.tsx
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { ScrollReveal } from "@/components/animate/scroll-reveal";
+import { TiltCard } from "@/components/animate/tilt-card";
+
+const FeaturesBlock = ({ data, isRTL }) => {
+  return (
+    <div>
+      {data.features.map((feature, i) => (
+        <ScrollReveal key={i} y={16 * i} delay={i * 0.05}>
+          <TiltCard>
+            <Card className="group border-neutral-200/60 bg-white/70 transition-transform hover:-translate-y-1 hover:shadow-xl backdrop-blur dark:border-neutral-800/60 dark:bg-neutral-900/50">
+              {/* rest of code here */}
+            </Card>
+          </TiltCard>
+        </ScrollReveal>
+      ))}
+      {/* rest of code here */}
+    </div>
+  );
+};
+
+export default FeaturesBlock;
+
+// components/blocks/services-block.tsx
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { ScrollReveal } from "@/components/animate/scroll-reveal";
+import { TiltCard } from "@/components/animate/tilt-card";
+
+const ServicesBlock = ({ data, isRTL }) => {
+  const CardInner = ({ service }) => {
+    return (
+      <TiltCard>
+        <Card className="group border-neutral-200/60 bg-white/70 backdrop-blur transition-transform hover:-translate-y-1.5 hover:shadow-2xl dark:border-neutral-800/60 dark:bg-neutral-900/50">
+          {/* rest of code here */}
+        </Card>
+      </TiltCard>
+    );
+  };
+
+  return (
+    <div>
+      {data.services.map((service, i) => (
+        <ScrollReveal key={i} y={16 * i} delay={i * 0.05}>
+          <CardInner service={service} />
+        </ScrollReveal>
+      ))}
+      {/* rest of code here */}
+    </div>
+  );
+};
+
+export default ServicesBlock;
+
+// components/blocks/testimonials-block.tsx
+import React from "react";
+import { Card } from "@/components/ui/card";
+import { ScrollReveal } from "@/components/animate/scroll-reveal";
+
+const TestimonialsBlock = ({ data }) => {
+  return (
+    <div>
+      {data.testimonials.map((testimonial, i) => (
+        <ScrollReveal key={i} y={16 * i} delay={i * 0.05}>
+          <Card
+            className={[
+              "relative border-neutral-200/60 bg-white/70 backdrop-blur dark:border-neutral-800/60 dark:bg-neutral-900/50 transition-all",
+              "hover:-translate-y-1 hover:shadow-xl",
+              entered ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
+            ].join(" ")}
+          >
+            {/* rest of code here */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-transparent group-hover:ring-emerald-400/20" />
+          </Card>
+        </ScrollReveal>
+      ))}
+      {/* rest of code here */}
+    </div>
+  );
+};
+
+export default TestimonialsBlock;
